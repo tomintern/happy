@@ -1,6 +1,6 @@
 {
   "name": "happy",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "url": "https://github.com/Phonbopit/happy",
   "scripts": {
     "start": "node src/server.js",

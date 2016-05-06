@@ -40,7 +40,7 @@ suite('API', () => {
 
     let result = {
       name: 'happy',
-      version: '0.0.4',
+      version: '1.0.0',
       url: 'https://github.com/Phonbopit/happy'
     };
 
@@ -205,6 +205,22 @@ suite('API', () => {
         done();
       });
 
+    });
+
+    test('/users should list all users', done => {
+      let option = {
+        method: 'GET',
+        url: '/users',
+        headers: {
+          Authorization: ACCESS_TOKEN
+        }
+      };
+
+      server.inject(option, res => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.data).to.be.a.array();
+        done();
+      });
     });
   });
 

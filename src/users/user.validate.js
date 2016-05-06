@@ -6,7 +6,7 @@ Joi.objectId = require('joi-objectid')(Joi);
 let findAll = {
   query: {
     limit: Joi.number().integer().min(1).max(1000).default(50),
-    sort: Joi.string(),
+    sort: Joi.string().default('-createdAt'),
     fields: Joi.string()
   }
 };

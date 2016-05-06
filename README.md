@@ -42,8 +42,9 @@ npm test
 
 - [/auth/register](#register)
 - [/auth/login](#login)
-- `/me` (TODO)
-- `/users` (TODO)
+- [/me](#me)
+- [/users](#users)
+- [/users/{userId}](#userId)
 
 ### Register
 
@@ -151,5 +152,88 @@ or
 {
   "statusCode": 1003,
   "message": "Email address or password incorrect"
+}
+```
+
+### me
+
+```
+/me
+```
+
+This endpoint use for check current user by include `Authentication` header with `accessToken` from logged in.
+
+```
+curl -i -H 'Content-Type: application/json' \
+-H "Accept: application/json" \
+-H "Authorization: ACCESS_TOKEN"
+-X GET \
+http://localhost:8000/me
+```
+
+Example success response
+
+```
+{
+  "statusCode": 1000,
+  "message": "OK",
+  "data": {
+    "_id": "572cf69461f2880af73740a9",
+    "name": "",
+    "email": "chai5@example.com",
+    "updatedAt": "2016-05-06T19:55:00.217Z",
+    "createdAt": "2016-05-06T19:55:00.217Z"
+  }
+}
+```
+
+### Users
+
+```
+/users
+```
+
+List all users (Assuming all user has permissions)
+
+| Name | Type | Default | Available |
+|----------|------|------|--------|
+| fileds | String | - | name, email |
+| sort | String | -createdAt | name, email, createdAt, updatedAt |
+| limit | Number | 30 | 1 - 1000 |
+
+Example valid
+
+- `/users?sort=name&limit=100` : order by name and limit 100
+- '/users?sort=-createdAt': order by date DESC
+- `/users?fields=name,email` : query only name and email
+
+```
+curl -i -H 'Content-Type: application/json' \
+-H "Accept: application/json" \
+-H "Authorization: ACCESS_TOKEN"
+-X GET \
+http://localhost:8000/users
+```
+
+Example success response
+
+```
+{
+  "statusCode": 1000,
+  "message": "OK",
+  "data": [
+    {
+      "_id": "572cf69461f2880af73740a9",
+      "name": "",
+      "email": "chai@example.com",
+      "updatedAt": "2016-05-06T19:55:00.217Z",
+      "createdAt": "2016-05-06T19:55:00.217Z"
+    },
+    {...},
+    {...},
+    {...},
+    {...},
+    {...}
+  ]
 }
 ```
