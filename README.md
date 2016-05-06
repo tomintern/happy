@@ -180,7 +180,7 @@ Example success response
   "data": {
     "_id": "572cf69461f2880af73740a9",
     "name": "",
-    "email": "chai5@example.com",
+    "email": "chai@example.com",
     "updatedAt": "2016-05-06T19:55:00.217Z",
     "createdAt": "2016-05-06T19:55:00.217Z"
   }
@@ -235,5 +235,37 @@ Example success response
     {...},
     {...}
   ]
+}
+```
+
+### UserId
+
+```
+/users/{userId}
+```
+
+Get a user detail by id (same as /me but specific id)
+
+```
+curl -i -H 'Content-Type: application/json' \
+-H "Accept: application/json" \
+-H "Authorization: ACCESS_TOKEN"
+-X GET \
+http://localhost:8000/users/572cf69461f2880af73740a9
+```
+
+Example response
+
+```
+{
+  "statusCode": 1000,
+  "message": "OK",
+  "data": {
+    "_id": "572cf69461f2880af73740a9",
+    "name": "",
+    "email": "chai@example.com",
+    "updatedAt": "2016-05-06T19:55:00.217Z",
+    "createdAt": "2016-05-06T19:55:00.217Z"
+  }
 }
 ```
