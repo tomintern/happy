@@ -5,8 +5,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "lint": "./node_modules/.bin/gulp watch",
-    "test": "./node_modules/.bin/lab -r html -o test/coverage.html test",
-    "test:console": "./node_modules/.bin/lab test",
+    "test": "./node_modules/.bin/lab test",
+    "test:coverage": "./node_modules/.bin/lab -r html -o test/coverage.html test",
     "test:watch": "./node_modules/.bin/fsmonitor -s -p '+*.js' npm run test:console"
   },
   "dependencies": {
