@@ -7,6 +7,8 @@ const Hapi = require('hapi');
 
 const config = require('../src/config.js');
 const routes = require('../src/routes.js');
+const db = require('../src/db')(); // invoke db configuration.
+const User = require('../src/users/user.model');
 
 const test = lab.test;
 const suite = lab.suite;
@@ -80,10 +82,36 @@ suite('API', () => {
       server.inject(options, (res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.result.message).to.equal('Register successfully');
+        expect(res.result.data.accessToken).to.be.a.string();
         done();
       })
     });
+
+    test('POST /auth/register email address should not duplicated', done => {
+
+      let options = {
+        method: 'POST',
+        url: '/auth/register',
+        payload: {
+          email: 'chai@example.com',
+          password: 'mypassword'
+        }
+      }
+
+      server.inject(options, (res) => {
+        expect(res.statusCode).to.equal(200); // html code
+        expect(res.result.statusCode).to.equal(1001); // dev code
+        expect(res.result.message).to.equal('Email address already exists');
+        done();
+      });
+
+    });
   });
 
+  after(done => {
+    User.remove({email: 'chai@example.com'}, (err, result) => {
+      done();
+    });
+  });
 
 });

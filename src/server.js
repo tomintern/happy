@@ -3,13 +3,11 @@
 const Hapi = require('hapi');
 const config = require('./config');
 const routes = require('./routes');
+const db = require('./db')() // invoke db.
 
 const server = new Hapi.Server();
 
-server.connection({
-  host: config.app.host,
-  port: config.app.port
-});
+server.connection(config.server);
 
 for (let route in routes) {
   server.route(routes[route]);
