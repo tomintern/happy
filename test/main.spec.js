@@ -53,8 +53,17 @@ suite('API', () => {
   });
 
   suite('Register', () => {
+    let options = {
+      method: 'POST',
+      url: '/auth/register',
+      payload: {
+        email: 'chai@example.com',
+        password: 'mypassword'
+      }
+    };
+
     test('POST /auth/register should return error mesasge if payload do not include email and password', done => {
-      let options = {
+      let WrongOptions = {
         method: 'POST',
         url: '/auth/register',
         payload: {
@@ -62,7 +71,7 @@ suite('API', () => {
           password: 'mypassword'
         }
       }
-      server.inject(options, (res) => {
+      server.inject(WrongOptions, (res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.result.message).to.equal('child \"email\" fails because [\"email\" is required]');
         done();
@@ -70,15 +79,6 @@ suite('API', () => {
     });
 
     test('POST /auth/register should return successful message if register completed', done => {
-      let options = {
-        method: 'POST',
-        url: '/auth/register',
-        payload: {
-          email: 'chai@example.com',
-          password: 'mypassword'
-        }
-      }
-
       server.inject(options, (res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.result.message).to.equal('Register successfully');
@@ -88,16 +88,6 @@ suite('API', () => {
     });
 
     test('POST /auth/register email address should not duplicated', done => {
-
-      let options = {
-        method: 'POST',
-        url: '/auth/register',
-        payload: {
-          email: 'chai@example.com',
-          password: 'mypassword'
-        }
-      }
-
       server.inject(options, (res) => {
         expect(res.statusCode).to.equal(200); // html code
         expect(res.result.statusCode).to.equal(1001); // dev code
