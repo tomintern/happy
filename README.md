@@ -45,7 +45,6 @@ npm test
 - `/me` (TODO)
 - `/users` (TODO)
 
-<a name="register"></a>
 ### Register
 
 ```
@@ -101,7 +100,6 @@ or
 }
 ```
 
-<a name="login"></a>
 ### Login
 
 ```
