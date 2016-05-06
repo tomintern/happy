@@ -2,3 +2,5 @@ node_modules
 *.log
 
 test/coverage.html
+
+.env
