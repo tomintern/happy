@@ -9,14 +9,18 @@ module.exports = [
     {
       method: 'GET',
       path: '/',
-      handler: (request, reply) => {
-        reply({
-          name: app.name,
-          version: app.version,
-          url: app.url
-        });
+      config: {
+        auth: false,
+        handler: (request, reply) => {
+          reply({
+            name: app.name,
+            version: app.version,
+            url: app.url
+          });
+        }
       }
     }
   ],
-  authRoutes
+  authRoutes,
+  userRoutes
 ];

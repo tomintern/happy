@@ -26,7 +26,7 @@ let register = {
           return reply({
             statusCode: 1001,
             message: 'Email address already exists'
-          }).code(401);
+          }).code(400);
         }
         return reply(Boom.wrap(err, 1001, err.message));
       }
@@ -55,6 +55,7 @@ let register = {
 };
 
 let login = {
+  auth: false,
   validate: validate.login,
   handler: (request, reply) => {
     let payload = request.payload;
@@ -66,7 +67,7 @@ let login = {
           return reply({
             statusCode: 1001,
             message: err.message
-          }).code(401);
+          }).code(400);
         }
 
         if (user) {
@@ -95,14 +96,14 @@ let login = {
             return reply({
               statusCode: 1003,
               message: "Email address or password incorrect"
-            }).code(401);
+            }).code(400);
           }
 
         } else {
           return reply({
             statusCode: 1002,
             message: "Email doesn't exist"
-          }).code(401);
+          }).code(400);
         }
       });
   }

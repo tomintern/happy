@@ -9,6 +9,7 @@ const config = require('../src/config.js');
 const routes = require('../src/routes.js');
 const db = require('../src/db')(); // invoke db configuration.
 const User = require('../src/users/user.model');
+const server = require('../src/server');
 
 const test = lab.test;
 const suite = lab.suite;
@@ -18,14 +19,7 @@ const after = lab.after;
 
 suite('API', () => {
 
-  const server = new Hapi.Server();
-
   before(done => {
-    server.connection(config.server);
-
-    for (var route in routes) {
-      server.route(routes[route]);
-    }
 
     // clear db with test accout
     User.remove({email: 'chai@example.com'});
@@ -92,7 +86,7 @@ suite('API', () => {
 
     test('POST /auth/register email address should not duplicated', done => {
       server.inject(options, (res) => {
-        expect(res.statusCode).to.equal(401); // html code
+        expect(res.statusCode).to.equal(400); // html bad request code
         expect(res.result.statusCode).to.equal(1001); // dev code
         expect(res.result.message).to.equal('Email address already exists');
         done();
@@ -132,7 +126,7 @@ suite('API', () => {
       };
 
       server.inject(opt, (res => {
-        expect(res.statusCode).to.equal(401);
+        expect(res.statusCode).to.equal(400);
         expect(res.result.message).to.equal("Email doesn't exist");
         done();
       }));
@@ -149,10 +143,29 @@ suite('API', () => {
       };
 
       server.inject(opt, (res => {
-        expect(res.statusCode).to.equal(401);
+        expect(res.statusCode).to.equal(400);
         expect(res.result.message).to.equal('Email address or password incorrect');
         done();
       }));
+    });
+  });
+
+  suite('User', () => {
+    test('/me should require token as Authorization', done => {
+
+      let option = {
+        method: 'GET',
+        url: '/me'
+      };
+
+      server.inject(option, res => {
+        expect(res.statusCode).to.equal(401); //Unauthorized
+        expect(res.result).to.deep.equal({
+          statusCode: 4001,
+          message: 'Unauthorized : Missing authentication'
+        });
+        done();
+      });
     });
   });
 
