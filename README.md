@@ -5,7 +5,7 @@ happy
 
 **happy** : A minimal [hapijs](http://hapijs.com/) API.
 
-Hapijs Authentication with [JWT]() with [Boom](), [Joi](), [Good](), [Code]() and [Lab]()
+Hapijs Authentication with [JWT](https://jwt.io/) with [Boom](https://github.com/hapijs/boom), [Joi](https://github.com/hapijs/joi), [Good](https://github.com/hapijs/good), [Code](https://github.com/hapijs/code) and [Lab](https://github.com/hapijs/lab)
 
 ## Usage
 
