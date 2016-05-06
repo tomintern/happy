@@ -89,12 +89,67 @@ suite('API', () => {
 
     test('POST /auth/register email address should not duplicated', done => {
       server.inject(options, (res) => {
-        expect(res.statusCode).to.equal(200); // html code
+        expect(res.statusCode).to.equal(400); // html code
         expect(res.result.statusCode).to.equal(1001); // dev code
         expect(res.result.message).to.equal('Email address already exists');
         done();
       });
 
+    });
+  });
+
+  suite('Login', () => {
+
+    let options = {
+      method: 'POST',
+      url: '/auth/login',
+      payload: {
+        email: 'chai@example.com',
+        password: 'mypassword'
+      }
+    };
+    test('POST /auth/login when logged in should have accessToken', done => {
+      server.inject(options, (res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.message).to.equal('OK');
+        expect(res.result.data.accessToken).to.be.a.string();
+        done();
+      });
+    });
+
+    test('POST /auth/login should return error message if email incorrect', done => {
+      
+      let opt = {
+        method: 'POST',
+        url: '/auth/login',
+        payload: {
+          email: 'none@exmaple.com',
+          password: 'password'
+        }
+      };
+
+      server.inject(opt, (res => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.result.message).to.equal("Email doesn't exist");
+        done();
+      }));
+    });
+
+    test('POST /auth/login should return error message if password incorrect', done => {
+      let opt = {
+        method: 'POST',
+        url: '/auth/login',
+        payload: {
+          email: 'chai@example.com',
+          password: 'inccorect'
+        }
+      };
+
+      server.inject(opt, (res => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.result.message).to.equal('Email address or password incorrect');
+        done();
+      }));
     });
   });
 
