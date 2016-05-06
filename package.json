@@ -1,0 +1,7 @@
+{
+  "name": "tpl-info",
+  "version": "0.0.1",
+  "dependencies": {
+    "hapi": "^13.3.0"
+  }
+}
