@@ -19,6 +19,9 @@ const after = lab.after;
 
 suite('API', () => {
 
+  let ACCESS_TOKEN;
+  let USER_ID;
+
   before(done => {
 
     // clear db with test accout
@@ -37,7 +40,7 @@ suite('API', () => {
 
     let result = {
       name: 'happy',
-      version: '0.0.3',
+      version: '0.0.4',
       url: 'https://github.com/Phonbopit/happy'
     };
 
@@ -80,6 +83,8 @@ suite('API', () => {
         expect(res.statusCode).to.equal(200);
         expect(res.result.message).to.equal('Register successfully');
         expect(res.result.data.accessToken).to.be.a.string();
+        ACCESS_TOKEN = res.result.data.accessToken; // save token
+        USER_ID = res.result.data.profile.id; // save user id
         done();
       })
     });
@@ -167,7 +172,42 @@ suite('API', () => {
         done();
       });
     });
+
+    test('/me should return current user information', done => {
+      let option = {
+        method: 'GET',
+        url: '/me',
+        headers: {
+          Authorization: ACCESS_TOKEN
+        }
+      }
+
+      server.inject(option, res => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.message).to.equal('OK');
+        expect(res.result.data).to.be.a.object();
+        done();
+      });
+    });
+
+    test('/users/{userId} should show user information', done => {
+      let option = {
+        method: 'GET',
+        url: '/users/' + USER_ID,
+        headers: {
+          Authorization: ACCESS_TOKEN
+        }
+      };
+
+      server.inject(option, res => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.message).to.equal('OK');
+        done();
+      });
+
+    });
   });
+
 
   after(done => {
     User.remove({email: 'chai@example.com'}, (err, result) => {

@@ -15,7 +15,7 @@ let routes = [
   },
   {
     method: 'GET',
-    path: '/users/:userId',
+    path: '/users/{userId}',
     config: user.findById
   }
 ];

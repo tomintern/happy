@@ -1,6 +1,6 @@
 {
   "name": "happy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "url": "https://github.com/Phonbopit/happy",
   "scripts": {
     "start": "node src/server.js",
@@ -20,6 +20,7 @@
     "hapi": "^13.3.0",
     "hapi-auth-jwt2": "^6.0.0",
     "joi": "^8.0.5",
+    "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^6.2.0",
     "mongoose": "^4.4.14"
   },
