@@ -1,7 +1,31 @@
 {
   "name": "tpl-info",
   "version": "0.0.1",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "lint": "./node_modules/.bin/gulp watch",
+    "test": "./node_modules/.bin/lab -r html -o test/coverage.html test",
+    "test:console": "./node_modules/.bin/lab test",
+    "test:watch": "./node_modules/.bin/fsmonitor -s -p '+*.js' npm run test:console"
+  },
   "dependencies": {
-    "hapi": "^13.3.0"
+    "boom": "^3.1.2",
+    "chalk": "^1.1.3",
+    "dotenv": "^2.0.0",
+    "hapi": "^13.3.0",
+    "hapi-auth-jwt2": "^6.0.0",
+    "joi": "^8.0.5",
+    "jsonwebtoken": "^6.2.0",
+    "mongoose": "^4.4.14"
+  },
+  "devDependencies": {
+    "code": "^2.2.1",
+    "fsmonitor": "^0.2.4",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "lab": "^10.4.0"
   }
 }
