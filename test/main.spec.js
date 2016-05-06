@@ -43,7 +43,7 @@ suite('API', () => {
 
     let result = {
       name: 'happy',
-      version: '0.0.1',
+      version: '0.0.3',
       url: 'https://github.com/Phonbopit/happy'
     };
 
