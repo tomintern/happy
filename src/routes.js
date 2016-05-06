@@ -2,6 +2,7 @@
 
 const authRoutes = require('./auth/auth.routes');
 const userRoutes = require('./users/user.routes');
+const app = require('../package.json');
 
 module.exports = [
   [
@@ -10,9 +11,9 @@ module.exports = [
       path: '/',
       handler: (request, reply) => {
         reply({
-          name: "happy",
-          version: "0.0.1",
-          url: "https://github.com/Phonbopit/happy"
+          name: app.name,
+          version: app.version,
+          url: app.url
         });
       }
     }
