@@ -27,6 +27,9 @@ suite('API', () => {
       server.route(routes[route]);
     }
 
+    // clear db with test accout
+    User.remove({email: 'chai@example.com'});
+
     done();
 
   });
@@ -72,7 +75,7 @@ suite('API', () => {
         }
       }
       server.inject(WrongOptions, (res) => {
-        expect(res.statusCode).to.equal(400);
+        expect(res.statusCode).to.equal(400); // boom wrap html code
         expect(res.result.message).to.equal('child \"email\" fails because [\"email\" is required]');
         done();
       });
@@ -89,7 +92,7 @@ suite('API', () => {
 
     test('POST /auth/register email address should not duplicated', done => {
       server.inject(options, (res) => {
-        expect(res.statusCode).to.equal(400); // html code
+        expect(res.statusCode).to.equal(401); // html code
         expect(res.result.statusCode).to.equal(1001); // dev code
         expect(res.result.message).to.equal('Email address already exists');
         done();
@@ -129,7 +132,7 @@ suite('API', () => {
       };
 
       server.inject(opt, (res => {
-        expect(res.statusCode).to.equal(400);
+        expect(res.statusCode).to.equal(401);
         expect(res.result.message).to.equal("Email doesn't exist");
         done();
       }));
@@ -146,7 +149,7 @@ suite('API', () => {
       };
 
       server.inject(opt, (res => {
-        expect(res.statusCode).to.equal(400);
+        expect(res.statusCode).to.equal(401);
         expect(res.result.message).to.equal('Email address or password incorrect');
         done();
       }));

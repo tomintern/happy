@@ -37,3 +37,58 @@ npm run dev
 npm test
 
 ```
+
+## Endpoint
+
+- [/auth/register](#register)
+- [/auth/login](#login)
+
+<a name="register"></a>
+### Register
+
+```
+/auth/regitser
+```
+
+| Name | Type | Required | Default |
+|----------|------|------|--------|
+| email | String | Yes | - |
+| password | String | Yes | - |
+| name  | String | No | - |
+
+Example success response
+
+```
+{
+  "statusCode": 1000,
+  "message": "Register successfully",
+  "data": {
+    "profile": {
+      "id": "572c581eacc20039eda1cf65",
+      "email": "chai@example.com",
+      "name": ""
+    },
+    "accessToken": "eyJ..."
+  }
+}
+```
+
+Example failure response
+
+```
+{
+  "statusCode": 1001,
+  "message": "child \"email\" fails because [\"email\" is required]"
+}
+```
+
+or 
+
+```
+{
+  "statusCode": 1001,
+  "message": "\"some_name\" is not allowed"
+}
+```
+
+<a name="login"></a>
