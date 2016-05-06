@@ -6,6 +6,11 @@ let register = {
   validate: validate.register,
   handler: (request, reply) => {
     let payload = request.payload;
+
+    reply({
+      message: 'Register successfully',
+      data: payload
+    });
   }
 };
 

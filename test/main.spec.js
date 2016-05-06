@@ -50,22 +50,40 @@ suite('API', () => {
 
   });
 
-  test('POST /auth/register should return error mesasge if payload do not include email and password', done => {
-
-    let options = {
-      method: 'POST',
-      url: '/auth/register',
-      payload: {
-        name: 'chai@example.com',
-        password: 'mypassword'
+  suite('Register', () => {
+    test('POST /auth/register should return error mesasge if payload do not include email and password', done => {
+      let options = {
+        method: 'POST',
+        url: '/auth/register',
+        payload: {
+          name: 'chai@example.com',
+          password: 'mypassword'
+        }
       }
-    }
+      server.inject(options, (res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.result.message).to.equal('child \"email\" fails because [\"email\" is required]');
+        done();
+      });
+    });
 
-    server.inject(options, (res) => {
-      expect(res.statusCode).to.equal(400);
-      expect(res.result.message).to.equal('child \"email\" fails because [\"email\" is required]');
-      done();
+    test('POST /auth/register should return successful message if register completed', done => {
+      let options = {
+        method: 'POST',
+        url: '/auth/register',
+        payload: {
+          email: 'chai@example.com',
+          password: 'mypassword'
+        }
+      }
+
+      server.inject(options, (res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.message).to.equal('Register successfully');
+        done();
+      })
     });
   });
+
 
 });
