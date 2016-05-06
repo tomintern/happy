@@ -36,9 +36,24 @@ let findAll = {
 let findById = {
   validate: validate.findById,
   handler: (request, reply) => {
-    reply({
-      message: 'OK'
-    });
+
+    let userId = request.params.userId;
+
+    User
+      .findOne({_id: userId})
+      .select('-__v, -password')
+      .exec((err, user) => {
+
+        if (err) {
+          reply(Boom.wrap(err, 1001, err.message));
+        } else {
+          reply({
+            statusCode: 1000,
+            message: 'OK',
+            data: user
+          });
+        }
+      });
   }
 };
 

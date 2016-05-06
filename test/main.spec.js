@@ -201,7 +201,7 @@ suite('API', () => {
 
       server.inject(option, res => {
         expect(res.statusCode).to.equal(200);
-        expect(res.result.message).to.equal('OK');
+        expect(res.result.data).to.be.a.object();
         done();
       });
 
