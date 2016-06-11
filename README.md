@@ -1,4 +1,4 @@
-happy
+happy ![v1.1.1](https://img.shields.io/badge/version-1.1.1-green.svg)
 ---
 
 [![Build Status](https://travis-ci.org/Phonbopit/happy.svg?branch=master)](https://travis-ci.org/Phonbopit/happy)
@@ -16,13 +16,7 @@ Clone a repository
 ```
 git clone https://github.com/Phonbopit/happy.git
 cd happy
-npm install
-```
-
-Copy `.env.example` into `.env`
-
-```
-cp .env.example .env
+npm run setup
 ```
 
 Then, start a server

@@ -1,6 +1,6 @@
 {
   "name": "happy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "url": "https://github.com/Phonbopit/happy",
   "scripts": {
     "start": "node src/server.js",
@@ -8,7 +8,8 @@
     "lint": "./node_modules/.bin/gulp watch",
     "test": "./node_modules/.bin/lab test",
     "test:coverage": "./node_modules/.bin/lab -r html -o test/coverage.html test",
-    "test:watch": "npm run test --watch"
+    "test:watch": "npm run test --watch",
+    "setup": "node setup.js"
   },
   "dependencies": {
     "bcrypt": "^0.8.6",
