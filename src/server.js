@@ -61,35 +61,4 @@ server.register([
   }
 });
 
-server.ext('onPreResponse', (request, reply) => {
-
-  let response = request.response.output;
-
-  if (response) {
-    if (response.statusCode === 400) {
-
-      return reply({
-        statusCode: 1001,
-        message: `${response.payload.message}`
-      }).code(400);
-
-    } else if (response.statusCode === 401) {
-      return reply({
-        statusCode: 4001,
-        message: `${response.payload.error} : ${response.payload.message}`
-      }).code(401);
-    } else if (response.statusCode === 500) {
-      return reply.continue();
-    } else {
-      return reply({
-        statusCode: response.payload.statusCode,
-        message: response,
-      });
-    }
-  } else {
-    return reply.continue();
-  }
-
-});
-
 module.exports = server;
