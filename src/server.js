@@ -61,4 +61,15 @@ server.register([
   }
 });
 
+server.ext('onPreResponse', function (request, reply) {
+  var response = request.response;
+  if (response.isBoom && response.data) {
+    let message = response.data.message;
+    var result = message.match(/\[(.+)\]/);
+    response.output.payload.message = result[1] || message
+  }
+
+  return reply.continue();
+});
+
 module.exports = server;

@@ -40,7 +40,7 @@ suite('API', () => {
 
     let result = {
       name: 'happy',
-      version: '1.0.0',
+      version: '1.1.0',
       url: 'https://github.com/Phonbopit/happy'
     };
 
@@ -73,7 +73,7 @@ suite('API', () => {
       }
       server.inject(WrongOptions, (res) => {
         expect(res.statusCode).to.equal(400); // boom wrap html code
-        expect(res.result.message).to.equal('child \"email\" fails because [\"email\" is required]');
+        expect(res.result.message).to.equal('"email" is required');
         done();
       });
     });
