@@ -24,11 +24,10 @@ let register = {
       if (err) {
         if (err.code === 11000) {
           return reply({
-            statusCode: 1001,
             message: 'Email address already exists'
           }).code(400);
         }
-        return reply(Boom.wrap(err, 1001, err.message));
+        return reply(Boom.wrap(err, 400, err.message));
       }
 
       let token = JWT.sign({
@@ -39,16 +38,13 @@ let register = {
       });
 
       return reply({
-        statusCode: 1000,
         message: 'Register successfully',
-        data: {
-          profile: {
-            id: user._id,
-            email: user.email,
-            name: user.name || ''
-          },
-          accessToken: token
-        }
+        profile: {
+          id: user._id,
+          email: user.email,
+          name: user.name || ''
+        },
+        accessToken: token
       });
     });
   }
@@ -65,7 +61,6 @@ let login = {
       .exec((err, user) => {
         if (err) {
           return reply({
-            statusCode: 1001,
             message: err.message
           }).code(400);
         }
@@ -81,27 +76,21 @@ let login = {
             });
 
             return reply({
-              statusCode: 1000,
-              message: 'OK',
-              data: {
-                profile: {
-                  id: user._id,
-                  email: user.email,
-                  name: user.name
-                },
-                accessToken: token
-              }
+              profile: {
+                id: user._id,
+                email: user.email,
+                name: user.name
+              },
+              accessToken: token
             });
           } else {
             return reply({
-              statusCode: 1003,
               message: "Email address or password incorrect"
             }).code(400);
           }
 
         } else {
           return reply({
-            statusCode: 1002,
             message: "Email doesn't exist"
           }).code(400);
         }

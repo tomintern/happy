@@ -82,9 +82,9 @@ suite('API', () => {
       server.inject(options, (res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.result.message).to.equal('Register successfully');
-        expect(res.result.data.accessToken).to.be.a.string();
-        ACCESS_TOKEN = res.result.data.accessToken; // save token
-        USER_ID = res.result.data.profile.id; // save user id
+        expect(res.result.accessToken).to.be.a.string();
+        ACCESS_TOKEN = res.result.accessToken; // save token
+        USER_ID = res.result.profile.id; // save user id
         done();
       })
     });
@@ -92,7 +92,6 @@ suite('API', () => {
     test('POST /auth/register email address should not duplicated', done => {
       server.inject(options, (res) => {
         expect(res.statusCode).to.equal(400); // html bad request code
-        expect(res.result.statusCode).to.equal(1001); // dev code
         expect(res.result.message).to.equal('Email address already exists');
         done();
       });
@@ -113,8 +112,7 @@ suite('API', () => {
     test('POST /auth/login when logged in should have accessToken', done => {
       server.inject(options, (res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.result.message).to.equal('OK');
-        expect(res.result.data.accessToken).to.be.a.string();
+        expect(res.result.accessToken).to.be.a.string();
         done();
       });
     });
@@ -185,8 +183,7 @@ suite('API', () => {
 
       server.inject(option, res => {
         expect(res.statusCode).to.equal(200);
-        expect(res.result.message).to.equal('OK');
-        expect(res.result.data).to.be.a.object();
+        expect(res.result).to.be.a.object();
         done();
       });
     });
@@ -202,7 +199,7 @@ suite('API', () => {
 
       server.inject(option, res => {
         expect(res.statusCode).to.equal(200);
-        expect(res.result.data).to.be.a.object();
+        expect(res.result).to.be.a.object();
         done();
       });
 
@@ -219,7 +216,7 @@ suite('API', () => {
 
       server.inject(option, res => {
         expect(res.statusCode).to.equal(200);
-        expect(res.result.data).to.be.a.array();
+        expect(res.result).to.be.a.array();
         done();
       });
     });
