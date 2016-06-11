@@ -166,8 +166,9 @@ suite('API', () => {
       server.inject(option, res => {
         expect(res.statusCode).to.equal(401); //Unauthorized
         expect(res.result).to.deep.equal({
-          statusCode: 4001,
-          message: 'Unauthorized : Missing authentication'
+          statusCode: 401,
+          error: 'Unauthorized',
+          message: 'Missing authentication'
         });
         done();
       });
