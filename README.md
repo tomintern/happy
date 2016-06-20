@@ -64,7 +64,6 @@ Example success response
 
 ```
 {
-  "statusCode": 1000,
   "message": "Register successfully",
   "data": {
     "profile": {
@@ -81,8 +80,9 @@ Example failure response
 
 ```
 {
-  "statusCode": 1001,
-  "message": "child \"email\" fails because [\"email\" is required]"
+  "statusCode": 400,
+  "error": "Bad Request",
+  "message": "\"password\" is required"
 }
 ```
 
@@ -90,7 +90,8 @@ or
 
 ```
 {
-  "statusCode": 1001,
+  "statusCode": 400,
+  "error": "Bad Request",
   "message": "\"some_name\" is not allowed"
 }
 ```
@@ -118,16 +119,12 @@ Example success response
 
 ```
 {
-  "statusCode": 1000,
-  "message": "OK",
-  "data": {
-    "profile": {
-      "id": "572c5a4a33c6022fee6d75ef",
-      "email": "chai@example.com",
-      "name": ""
-    },
-    "accessToken": "eyJ..."
-  }
+  "profile": {
+    "id": "572c5a4a33c6022fee6d75ef",
+    "email": "chai@example.com",
+    "name": ""
+  },
+  "accessToken": "eyJ..."
 }
 ```
 
@@ -135,16 +132,8 @@ Example failure response
 
 ```
 {
-  "statusCode": 1001,
-  "message": "Email address already exists"
-}
-```
-
-or 
-
-```
-{
-  "statusCode": 1003,
+  "statusCode": 400,
+  "error": "Bad Request",
   "message": "Email address or password incorrect"
 }
 ```
@@ -169,15 +158,11 @@ Example success response
 
 ```
 {
-  "statusCode": 1000,
-  "message": "OK",
-  "data": {
     "_id": "572cf69461f2880af73740a9",
     "name": "",
     "email": "chai@example.com",
     "updatedAt": "2016-05-06T19:55:00.217Z",
     "createdAt": "2016-05-06T19:55:00.217Z"
-  }
 }
 ```
 
@@ -212,24 +197,20 @@ http://localhost:8000/users
 Example success response
 
 ```
-{
-  "statusCode": 1000,
-  "message": "OK",
-  "data": [
+[
     {
-      "_id": "572cf69461f2880af73740a9",
-      "name": "",
-      "email": "chai@example.com",
-      "updatedAt": "2016-05-06T19:55:00.217Z",
-      "createdAt": "2016-05-06T19:55:00.217Z"
+        "_id": "572cf69461f2880af73740a9",
+        "name": "",
+        "email": "chai@example.com",
+        "updatedAt": "2016-05-06T19:55:00.217Z",
+        "createdAt": "2016-05-06T19:55:00.217Z"
     },
     {...},
     {...},
     {...},
     {...},
     {...}
-  ]
-}
+]
 ```
 
 ### UserId
@@ -252,14 +233,10 @@ Example response
 
 ```
 {
-  "statusCode": 1000,
-  "message": "OK",
-  "data": {
     "_id": "572cf69461f2880af73740a9",
     "name": "",
     "email": "chai@example.com",
     "updatedAt": "2016-05-06T19:55:00.217Z",
     "createdAt": "2016-05-06T19:55:00.217Z"
-  }
 }
 ```
