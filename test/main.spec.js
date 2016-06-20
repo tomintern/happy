@@ -40,7 +40,7 @@ suite('API', () => {
 
     let result = {
       name: 'happy',
-      version: '1.1.1',
+      version: '1.2.0',
       url: 'https://github.com/Phonbopit/happy'
     };
 
@@ -130,7 +130,7 @@ suite('API', () => {
 
       server.inject(opt, (res => {
         expect(res.statusCode).to.equal(400);
-        expect(res.result.message).to.equal("Email doesn't exist");
+        expect(res.result.message).to.equal("Email does not exist");
         done();
       }));
     });

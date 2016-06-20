@@ -66,7 +66,9 @@ server.ext('onPreResponse', function (request, reply) {
   if (response.isBoom && response.data) {
     let message = response.data.message;
     var result = message.match(/\[(.+)\]/);
-    response.output.payload.message = result[1] || message
+    if (result) {
+      response.output.payload.message = result[1] || message;
+    }
   }
 
   return reply.continue();

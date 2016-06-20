@@ -14,9 +14,9 @@ let me = {
       .exec((err, user) => {
 
         if (err) {
-          reply(Boom.wrap(err, 400, err.message));
+          return reply(Boom.badRequest(err.message));
         } else {
-          reply(user);
+          return reply(user);
         }
       });
   }
@@ -31,10 +31,7 @@ let findAll = {
     let sort = request.query.sort;
 
     if (/password/g.test(fields)) {
-      return reply({
-        statusCode: 1001,
-        message: 'Bad Request, can not query password field'
-      }).code(400);
+      return reply(Boom.badRequest('Can not query password field'));
     }
 
     if (fields) {
@@ -50,7 +47,7 @@ let findAll = {
       .exec((err, result) => {
 
         if (err) {
-          return reply(Boom.wrap(err, 400, err.message));
+          return reply(Boom.badRequest(err.message));
         } else {
           return reply(result);
         }
@@ -70,9 +67,9 @@ let findById = {
       .exec((err, user) => {
 
         if (err) {
-          reply(Boom.wrap(err, 400, err.message));
+          return reply(Boom.badRequest(err.message));
         } else {
-          reply(user);
+          return reply(user);
         }
       });
   }

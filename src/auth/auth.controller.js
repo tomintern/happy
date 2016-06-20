@@ -23,11 +23,9 @@ let register = {
 
       if (err) {
         if (err.code === 11000) {
-          return reply({
-            message: 'Email address already exists'
-          }).code(400);
+          return reply(Boom.badRequest('Email address already exists'));
         }
-        return reply(Boom.wrap(err, 400, err.message));
+        return reply(Boom.badRequest(err.message));
       }
 
       let token = JWT.sign({
@@ -60,9 +58,7 @@ let login = {
       .findOne({ email: payload.email })
       .exec((err, user) => {
         if (err) {
-          return reply({
-            message: err.message
-          }).code(400);
+          return reply(Boom.badRequest(err.message));
         }
 
         if (user) {
@@ -84,15 +80,11 @@ let login = {
               accessToken: token
             });
           } else {
-            return reply({
-              message: "Email address or password incorrect"
-            }).code(400);
+            return reply(Boom.badRequest('Email address or password incorrect'));
           }
 
         } else {
-          return reply({
-            message: "Email doesn't exist"
-          }).code(400);
+          return reply(Boom.badRequest('Email does not exist'));
         }
       });
   }
