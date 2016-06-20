@@ -1,4 +1,4 @@
-happy ![v1.1.1](https://img.shields.io/badge/version-1.1.1-green.svg)
+happy ![v1.1.1](https://img.shields.io/badge/version-1.2.0-green.svg)
 ---
 
 [![Build Status](https://travis-ci.org/Phonbopit/happy.svg?branch=master)](https://travis-ci.org/Phonbopit/happy)
